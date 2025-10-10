@@ -15,5 +15,9 @@ const hobbies = [ 'Sports', 'Cooking' ];
 // }
 
 // Map: Transform into a new array by inputing a function on how to transform each element.
-console.log(hobbies.map(hobby => 'Hobby: ' + hobby));
+// console.log(hobbies.map(hobby => 'Hobby: ' + hobby));
+// console.log(hobbies);
+
+// A Reference type mofification.
+hobbies.push('Programming');
 console.log(hobbies);
