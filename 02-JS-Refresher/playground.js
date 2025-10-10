@@ -9,14 +9,27 @@ const person = {
     }
 };
 
-const copiedPerson = {...person};
-console.log(copiedPerson);
+// Object Destructuring.
+const printName = ({ name }) => {
+    console.log(name);
+}
+
+printName(person);
+const { age, name } = person;
+console.log(age, name);
+
+// const copiedPerson = {...person};
+// console.log(copiedPerson);
 
 // Rest operator: Collects multiple elements and condenses them into an array.
-const toArray = (...args) => args;
-console.log(toArray(1, 2, 3, 4));
+// const toArray = (...args) => args;
+// console.log(toArray(1, 2, 3, 4));
 
 const hobbies = [ 'Sports', 'Cooking' ];
+const [ hobby1, hobby2 ] = hobbies;
+console.log(hobby1, hobby2);
+
+/*
 // for (let hobby of hobbies) {
 //     console.log(hobby);
 // }
@@ -39,3 +52,5 @@ const hobbies = [ 'Sports', 'Cooking' ];
 const copiedArray = [...hobbies]; 
 
 console.log(copiedArray);
+
+*/
