@@ -9,6 +9,13 @@ const person = {
     }
 };
 
+const copiedPerson = {...person};
+console.log(copiedPerson);
+
+// Rest operator: Collects multiple elements and condenses them into an array.
+const toArray = (...args) => args;
+console.log(toArray(1, 2, 3, 4));
+
 const hobbies = [ 'Sports', 'Cooking' ];
 // for (let hobby of hobbies) {
 //     console.log(hobby);
@@ -19,5 +26,16 @@ const hobbies = [ 'Sports', 'Cooking' ];
 // console.log(hobbies);
 
 // A Reference type mofification.
-hobbies.push('Programming');
-console.log(hobbies);
+// hobbies.push('Programming');
+// console.log(hobbies);
+
+// Copy an array.
+// const copiedArray = hobbies.slice();
+
+// Array inside an array.
+// const copiedArray = [hobbies];
+
+// Spread Operator: Pull out all props, items and spread it.
+const copiedArray = [...hobbies]; 
+
+console.log(copiedArray);
