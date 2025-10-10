@@ -1,21 +1,16 @@
-// var it's considered an outdated syntax.
-const userName = "Carlos";
-let age = 28;
-const hasHobbies = true;
+// A key-value pair is also called a property or a field of the object.
+const person = {
+    name: 'Carlos',
+    age: 28,
+    // In this case, this.name referes to a global scope instead of current function scope.
+    // greet: () => {
+    greet: function () {
+        console.log(`Hi, I am ${this.name}.`);    
+    },
+    alsoGreet() {
+        console.log(`Hi, I am ${this.name}.`);    
+    }
+};
 
-age = 30;
-
-const summarizeUser = (userName, userAge, userHasHobbies) => {
-  return `Name is ${userName}, age is ${userAge} and the user has hobbies: ${userHasHobbies}`;
-}
-
-// const add = (a, b) => a + b;
-// const addOne = a  => a + 1;
-const addRandom = ()  => 2 + 3;
-
-// console.log(add(2, 3));
-// console.log(addOne(4));
-console.log(addRandom());
-
-
-console.log(summarizeUser(userName, age, hasHobbies));
+person.greet();
+person.alsoGreet();
