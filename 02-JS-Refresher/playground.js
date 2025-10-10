@@ -4,13 +4,16 @@ const person = {
     age: 28,
     // In this case, this.name referes to a global scope instead of current function scope.
     // greet: () => {
-    greet: function () {
-        console.log(`Hi, I am ${this.name}.`);    
-    },
-    alsoGreet() {
+    greet() {
         console.log(`Hi, I am ${this.name}.`);    
     }
 };
 
-person.greet();
-person.alsoGreet();
+const hobbies = [ 'Sports', 'Cooking' ];
+// for (let hobby of hobbies) {
+//     console.log(hobby);
+// }
+
+// Map: Transform into a new array by inputing a function on how to transform each element.
+console.log(hobbies.map(hobby => 'Hobby: ' + hobby));
+console.log(hobbies);
