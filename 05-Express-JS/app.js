@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser')
 
@@ -13,7 +14,7 @@ app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use((req, res, next) => {
     res.status(404)
-        .send('<h1>Page Not Found</h1>'); // Handle 404 errors.
+        .sendFile(path.join(__dirname, 'views', '404.html')); // Send a response to the client.
 });
 
 app.listen(3000);
