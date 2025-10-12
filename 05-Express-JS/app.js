@@ -11,5 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse the 
 app.use('/admin', adminRoutes); // Use the admin routes for any requests to /admin.
 app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
+app.use((req, res, next) => {
+    res.status(404)
+        .send('<h1>Page Not Found</h1>'); // Handle 404 errors.
+});
 
 app.listen(3000);
