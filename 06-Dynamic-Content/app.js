@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 
+// TODO: Install ejs, pug, express-handlebars
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
