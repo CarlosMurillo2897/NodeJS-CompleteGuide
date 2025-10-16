@@ -20,7 +20,9 @@ app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use((req, res, next) => {
     res.status(404)
-        .render('404'); // Send a response to the client.
+        .render('404', {
+            pageTitle: 'Page Not Found'
+        }); // Send a response to the client.
 });
 
 app.listen(3000);
