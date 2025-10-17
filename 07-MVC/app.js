@@ -2,14 +2,15 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { get404Page } = require('./controllers/error');
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
 const app = express();
 
 // TODO: Install ejs.
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse the body of incoming requests.
 
@@ -18,11 +19,6 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serve static files f
 app.use('/admin', adminRoutes); // Use the admin routes for any requests to /admin.
 app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
-app.use((req, res, next) => {
-    res.status(404)
-        .render('404', {
-            pageTitle: 'Page Not Found'
-        }); // Send a response to the client.
-});
+app.use(get404Page);
 
 app.listen(3000);
