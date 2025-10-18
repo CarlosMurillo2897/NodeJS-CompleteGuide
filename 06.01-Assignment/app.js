@@ -24,7 +24,8 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', (req, res, next) => {
     res.render('index', {
-        pageTitle: 'Add User'
+        pageTitle: 'Add User',
+        users: users
     });
 });
 
@@ -40,7 +41,7 @@ app.post('/add-user', (req, res, next) => {
     users.push({
         name: req.body.username
     });
-    res.redirectTo('/users');
+    res.redirect('/users');
 });
 
 app.listen(3000);
