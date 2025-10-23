@@ -1,4 +1,4 @@
-// TODO: Install express, ejs, pug, express-handlebars, body-parser & nodemon as dev.
+// TODO: TEST pug, express-handlebars.
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressHbs = require('express-handlebars');
