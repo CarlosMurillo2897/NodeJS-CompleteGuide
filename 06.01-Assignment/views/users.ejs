@@ -1,6 +1,12 @@
 <%- include('layouts/includes/head.ejs') %>
-    <form action="/add-user" method="post">
-        <input type="text" name="username" id="">
-        <button type="submit">Add User</button>
-    </form>
+    <h1>Users</h1>
+    <% if (users.length > 0) { %>
+        <ul>
+            <% users.forEach((user) => { %>
+                <li><%= user.name %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <h1>No Users Found!</h1>
+    <% } %>
 <%- include('layouts/includes/end.ejs') %>
