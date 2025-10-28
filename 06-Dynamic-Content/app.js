@@ -5,7 +5,6 @@ const expressHbs = require('express-handlebars');
 
 const app = express();
 
-// TODO: TEST pug, express-handlebars
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
