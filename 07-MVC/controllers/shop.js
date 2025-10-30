@@ -22,8 +22,8 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
     res.render('shop/cart', {
-        pageTitle: 'Cart',
-        path: '/Your Cart'
+        pageTitle: 'Your Cart',
+        path: '/cart'
     });
 };
 
@@ -31,5 +31,13 @@ exports.getCheckout = (req, res, next) => {
     res.render('shop/checkout', {
         pageTitle: 'Checkout',
         path: '/checkout'
+    });
+};
+
+
+exports.getOrders = (req, res, next) => {
+    res.render('shop/Orders', {
+        pageTitle: 'Your Orders',
+        path: '/orders'
     });
 };
