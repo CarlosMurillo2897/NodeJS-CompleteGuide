@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse the 
 
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the public directory.
 
-app.use('/admin', () => adminRoutes); // Use the admin routes for any requests to /admin.
+app.use('/admin', adminRoutes); // Use the admin routes for any requests to /admin.
 app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use(get404Page);
