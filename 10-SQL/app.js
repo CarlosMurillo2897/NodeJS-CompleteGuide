@@ -6,10 +6,15 @@ const { get404Page } = require('./controllers/error');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
+const db = require('./utils/database');
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+db.execute('SELECT * FROM products')
+    .then((result) => console.log(result))
+    .catch((error) => console.log(error))
 
 app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse the body of incoming requests.
 

@@ -1,0 +1,12 @@
+name: MYSQL-NODE
+
+services:
+  MYSQL-NODE:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: node-complete
+    ports:
+      - '3307:3306'
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d
