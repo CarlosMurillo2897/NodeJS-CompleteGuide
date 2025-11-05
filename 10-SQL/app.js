@@ -12,10 +12,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-db.execute('SELECT * FROM products')
-    .then((result) => console.log(result))
-    .catch((error) => console.log(error))
-
 app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse the body of incoming requests.
 
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the public directory.
