@@ -1,4 +1,4 @@
-name: MYSQL-NODE
+name: mysql-node
 
 services:
   MYSQL-NODE:
