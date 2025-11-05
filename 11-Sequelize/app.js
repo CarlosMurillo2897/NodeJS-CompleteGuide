@@ -6,7 +6,7 @@ const { get404Page } = require('./controllers/error');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-const db = require('./utils/database');
+const sequelize = require('./utils/database');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -21,4 +21,9 @@ app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use(get404Page);
 
-app.listen(3000);
+sequelize.sync().then(result => {
+    console.log('Database synchronized');
+    app.listen(3000);
+}).catch(err => {
+    console.log(err);
+});
