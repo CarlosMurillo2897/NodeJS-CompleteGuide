@@ -3,10 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { get404Page } = require('./controllers/error');
-// const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 
-const mongoConnect = require('./utils/database');
+const { mongoConnect } = require('./utils/database');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -22,15 +22,15 @@ app.use((req, res, next) => {
     //     req.user = user;
     //     next();
     // }).catch(err => console.log(err));
+    next();
 });
 
-// app.use('/admin', adminRoutes); // Use the admin routes for any requests to /admin.
+app.use('/admin', adminRoutes); // Use the admin routes for any requests to /admin.
 // app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use(get404Page);
 
-mongoConnect(client => {
-    console.log(client);
+mongoConnect(() => {
     console.log('Server is running on port 3000');
     app.listen(3000);
 });
