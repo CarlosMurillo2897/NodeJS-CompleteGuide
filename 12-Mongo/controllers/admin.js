@@ -9,13 +9,17 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-    const { title, description, price, imageUrl } = req.body;
-    req.user.createProduct({ title, imageUrl, description, price })
+    const { title, imageUrl, description, price } = req.body;
+    const product = new Product(title, price, description, imageUrl);
+    product.save()
         .then(result => {
-            console.log(result);
-            res.redirect('/');
-        }).catch(err => console.log(err));
-};
+            // console.log(result);
+            console.log('Created Product');
+            res.redirect('/admin/products');
+        }).catch(err => {
+            console.log(err);
+        });
+}; 
 
 // exports.getEditProduct = (req, res, next) => {
 //     const editMode = req.query.edit;

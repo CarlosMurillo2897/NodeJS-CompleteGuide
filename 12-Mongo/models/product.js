@@ -10,7 +10,7 @@ class Product {
 
     save() {
         const db = getDB();
-        db.collection('products')
+        return db.collection('products')
             .insertOne(this)
             .then(result => {
                 console.log(result);
@@ -18,30 +18,19 @@ class Product {
                 console.log(err);
             });
     }
-}
 
-// const Product = sequelize.define('product', {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         autoIncrement: true,
-//         allowNull: false,
-//         primaryKey: true
-//     },
-//     title: {
-//         type: Sequelize.STRING,
-//     },
-//     price: {
-//         type: Sequelize.DOUBLE,
-//         allowNull: false
-//     },
-//     imageUrl: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     },
-//     description: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     }
-// });
+    static fetchAll() {
+        const db = getDB();
+        return db.collection('products')
+            .find() // Returns cursor.
+            .toArray()
+            .then(products => {
+                return products;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+}
 
 module.exports = Product;

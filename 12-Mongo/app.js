@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const { get404Page } = require('./controllers/error');
 const adminRoutes = require('./routes/admin');
-// const shopRoutes = require('./routes/shop');
+const shopRoutes = require('./routes/shop');
 
 const { mongoConnect } = require('./utils/database');
 const app = express();
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes); // Use the admin routes for any requests to /admin.
-// app.use(shopRoutes); // Use the shop routes for any requests to /shop.
+app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use(get404Page);
 
