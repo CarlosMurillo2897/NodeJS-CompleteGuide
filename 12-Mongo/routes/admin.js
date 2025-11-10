@@ -14,18 +14,18 @@ const router = express.Router();
 router.get('/add-product', getAddProduct);
 
 // /admin/products => GET
-// router.get('/products', getProducts);
+router.get('/products', getProducts);
 
 // /admin/add-product => POST
 router.post('/add-product', postAddProduct);
 
-// // /admin/edit-product => GET
-// router.get('/edit-product/:productID', getEditProduct);
+// /admin/edit-product => GET
+router.get('/edit-product/:productID', getEditProduct);
 
-// // /admin/edit-product => POST
-// router.post('/edit-product', postEditProduct);
+// /admin/edit-product => POST
+router.post('/edit-product', postEditProduct);
 
-// // /admin/delete-product => POST
+// /admin/delete-product => POST
 // router.post('/delete-product', postDeleteProduct);
 
 module.exports = router;
