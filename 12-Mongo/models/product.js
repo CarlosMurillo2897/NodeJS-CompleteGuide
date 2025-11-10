@@ -7,16 +7,16 @@ class Product {
         this.imageUrl = imageUrl;
         this.description = description;
         this.price = price;
-        this._id = new mongodb.ObjectId(id);
+        this._id = id ? new mongodb.ObjectId(id) : null;
     }
 
     save() {
         const db = getDB();
         let dbOp;
-        if(this._id) {
+        if(this._id) {            
             // Update the product.
             dbOp = db.collection('products')
-                .updateOne({ _id: this._id }, { $set: this });
+            .updateOne({ _id: this._id }, { $set: this });
         } else {
             dbOp = db.collection('products')
                 .insertOne(this);
@@ -51,6 +51,16 @@ class Product {
                 return product;
             })
             .catch(err => {
+                console.log(err);
+            });
+    }
+    static deleteByID(productID) {
+        const db = getDB();
+        return db.collection('products')
+            .deleteOne({ _id: new mongodb.ObjectId(productID) })
+            .then(_ => {
+                console.log('Deleted');
+            }).catch(err => {
                 console.log(err);
             });
     }
