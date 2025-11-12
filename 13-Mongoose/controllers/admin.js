@@ -10,7 +10,7 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
     const { title, imageUrl, description, price } = req.body;
-    const product = new Product(title, imageUrl, description, price, null, req.user._id);
+    const product = new Product({ title, imageUrl, description, price });
     product.save()
         .then(_ => {
             console.log('Created Product');
@@ -26,7 +26,7 @@ exports.getEditProduct = (req, res, next) => {
         return res.redirect('/');
     }
     const { productID } = req.params;
-    Product.findByID(productID)
+    Product.findById(productID)
     // Product.findByPk(productID)
         .then(product => {
             if (!product) {
@@ -65,7 +65,7 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll()
+    Product.find()
         .then(products => {
             res.render('admin/products', {
                 prods: products,
