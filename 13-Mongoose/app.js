@@ -1,13 +1,13 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const { get404Page } = require('./controllers/error');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const User = require('./models/user');
 
-const { mongoConnect } = require('./utils/database');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -30,7 +30,11 @@ app.use(shopRoutes); // Use the shop routes for any requests to /shop.
 
 app.use(get404Page);
 
-mongoConnect(() => {
+mongoose.connect(
+    'mongodb+srv://cmb2808:root@common.b7p2yss.mongodb.net/?appName=common?retryWrites=true'
+).then(_ => {
     console.log('Server is running on port 3000');
     app.listen(3000);
+}).catch(err => {
+    console.log(err);
 });
