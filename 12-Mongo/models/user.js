@@ -58,6 +58,18 @@ class User {
             });
     }
 
+    deleteItemFromCart(productID) {
+        const updatedCartItems = this.cart.items.filter(item => {
+            return item.productID.toString() !== productID.toString();
+        });
+        const db = getDB();
+        return db.collection('users')
+            .updateOne(
+                { _id: this._id },
+                { $set: { cart: { items: updatedCartItems } } }
+            );
+    }
+
     static findByID(userId) {
         const db = getDB();
         return db.collection('users')
