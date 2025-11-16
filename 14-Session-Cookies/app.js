@@ -27,17 +27,8 @@ const authRoutes = require('./routes/auth');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
-  session({ secret: 'secret key', resave: false, saveUninitialized: false, store })
+  session({ secret: 'secret key', resave: false, saveUninitialized: false, store: store })
 );
-
-app.use((req, res, next) => {
-  User.findById('6914b46feaefcec5452b125e')
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
-});
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
