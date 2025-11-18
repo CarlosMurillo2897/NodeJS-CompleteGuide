@@ -48,7 +48,8 @@ exports.getCart = (req, res, next) => {
     .populate('cart.items.productId')
     .execPopulate()
     .then(user => {
-      const products = user.cart.items;
+      const products = user.cart.items
+        .filter(p => p.productId != null); // Remove items that were deleted.
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
