@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // Middleware to parse the 
 
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the public directory.
 
+// TODO: Add changes fror Section 13.
 app.use((req, res, next) => {
     User.findByID('6914b46feaefcec5452b125e')
     .then(user => {
