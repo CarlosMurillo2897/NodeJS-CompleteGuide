@@ -1,16 +1,23 @@
+import { ObjectId } from "https://deno.land/x/mongo/mod.ts";
+
 import { Router } from 'https://deno.land/x/oak/mod.ts';
+import { getDB } from '../helpers/db_client.ts';
 
 const router = new Router();
 
 interface Todo {
-    id: string;
+    id?: string;
     text: string;
 }
 
-let todos: Todo[] = [];
-
-router.get('/todos', ctx => {
-    ctx.response.body = { todos };
+router.get('/todos', async ctx => {
+    const todos = await getDB().collection('todos').find().toArray();
+    
+    const transformedTodos = todos.map(todo => {
+        return { id: todo._id.toString(), text: todo.text };
+    });
+    
+    ctx.response.body = { todos: transformedTodos };
 });
 
 router.post('/todos', async ctx => {
@@ -19,8 +26,8 @@ router.post('/todos', async ctx => {
         id: new Date().toISOString(),
         text: data.text
     };
-    todos.push(newTodo);
-
+    const id = await getDB().collection('todos').insertOne(newTodo);
+    newTodo.id = id.toString();
     ctx.response.body = {
         message: 'Created TODO!',
         todo: newTodo
@@ -28,18 +35,27 @@ router.post('/todos', async ctx => {
 });
 
 router.put('/todos/:todoId', async ctx => {
-    const id = ctx.params.todoId;
+    const id = ctx.params.todoId!;
     const data = await ctx.request.body.json();
-    const todoIndex = todos.findIndex(todo => {
-        return todo.id === id;
-    });
-    todos[todoIndex] = { id: todos[todoIndex].id, text: data.text };
+    
+    const t = await getDB()
+        .collection('todos')
+        .updateOne({ _id: new ObjectId(id) }, { 
+            $set: {
+                text: data.text
+            }
+        });        
+
     ctx.response.body = { message: 'Updated TODO!' };
 });
 
-router.delete('/todos/:todoId', ctx => {
-    const id = ctx.params.todoId;
-    todos = todos.filter(todo => todo.id !== id);
+router.delete('/todos/:todoId', async ctx => {
+    const id = ctx.params.todoId!;
+        
+    await getDB()
+        .collection('todos')
+        .deleteOne({ _id: new ObjectId(id) });
+
     ctx.response.body = { message: 'Deleted TODO!' };
 });
 
