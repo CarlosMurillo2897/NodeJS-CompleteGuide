@@ -4,10 +4,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
-const { graphqlHTTP } = require('express-graphql');
+const { createHandler } = require('graphql-http/lib/use/express');
 
-const graphqlSchema = require('./graphql/schema');
-const graphqlResolver = require('./graphql/resolvers');
+const { schema } = require('./graphql/schema');
 
 const app = express();
 
@@ -46,12 +45,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(
+app.all(
     '/graphql',
-    graphqlHTTP({
-        schema: graphqlSchema,
-        rootValue: graphqlResolver
-    })
+    createHandler({ schema })
 );
 
 app.use((error, req, res, next) => {
